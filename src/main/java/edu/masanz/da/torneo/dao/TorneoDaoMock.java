@@ -37,12 +37,12 @@ public class TorneoDaoMock implements ITorneoDao {
     @Override
     public Usuario getUsuarioByNombre(String nombre) {
         // TODO 03: Implementar la búsqueda de usuario por nombre
-
-
-
-
-
-
+        for (int i = 0; i < usuarios.length; i++) {
+            Usuario u = usuarios[i];
+            if( u != null && u.getNombre().equals(nombre)){
+                return u;
+            }
+        }
         return null;
     }
 
@@ -52,26 +52,36 @@ public class TorneoDaoMock implements ITorneoDao {
         // Este array no debe tener referencias nulas y su tamaño debe ser el justo
         TorneoFaseDto[] a = new TorneoFaseDto[torneos.length];
         int k = 0;
+        for (int i = 0; i < torneos.length; i++) {
+            Torneo t = torneos[i];
+            if(t != null){
+                String nombreFaseTorneo = null;
+                int idFase = t.getFase();
+                for (int j = 0; j < fases.length; j++) {
+                    Fase f = fases[i];
+                    if(f.getId() == idFase){
+                        nombreFaseTorneo = f.getNombre();
+                    }
 
+                }
+                TorneoFaseDto tf = new TorneoFaseDto(t.getId(), t.getNombre(),nombreFaseTorneo);
+                a[k] = tf;
+                k++;
+            }
 
-
-
-
-
-
-
-
-
-
-
-
+        }
 
         return Arrays.copyOfRange(a, 0, k);
     }
 
     private String getNombreEquipo(int idEquipo) {
         // TODO 05: Implementar la obtención del nombre del equipo por su id
-
+        for (int i = 0; i < usuarios.length; i++) {
+            Usuario u = usuarios[i];
+            if(u != null && u.getId() ==(idEquipo )){
+                return u.getNombre();
+            }
+        }
 
 
 
